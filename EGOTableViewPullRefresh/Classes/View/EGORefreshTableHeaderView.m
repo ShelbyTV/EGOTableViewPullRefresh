@@ -181,11 +181,18 @@
 	}
 	
 	if (scrollView.contentOffset.y <= - 65.0f && !_loading) {
-		
+        
+        CGRect scrollFrame = scrollView.frame;
+        [scrollView scrollRectToVisible:CGRectMake(scrollFrame.origin.x, 
+                                                   -160.0f, 
+                                                   scrollFrame.size.width, 
+                                                   scrollFrame.size.height) animated:YES];
+        
 		if ([_delegate respondsToSelector:@selector(egoRefreshTableHeaderDidTriggerRefresh:)]) {
 			[_delegate egoRefreshTableHeaderDidTriggerRefresh:self];
 		}
 		
+        
 		[self setState:EGOOPullRefreshLoading];
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.2];
